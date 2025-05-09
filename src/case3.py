@@ -42,6 +42,20 @@ def to_sentence_case(text):
 	text = text[0].upper() + text[1:].lower()
 	return text
 
+def to_sarcastic_case(text):
+    result = []
+    upper = False
+    for char in text:
+        if char.isalpha():
+            if upper:
+                result.append(char.upper())
+            else:
+                result.append(char.lower())
+            upper = not upper
+        else:
+            result.append(char)
+    return ''.join(result)
+
 # titlecase defined in separate file - from https://muffinresearch.co.uk/titlecasepy-titlecase-in-python/
  
 def produceOutput(theString): 
@@ -102,6 +116,18 @@ def produceOutput(theString):
         'subtitle': "Title Case",
         'valid': True,
         'uid': 'titlecase',
+        "icon": {
+            "path": 'icon.png'
+        },
+        'arg': resultString
+            }) 
+    
+    resultString = to_sarcastic_case(theString)
+    result["items"].append({
+        "title": resultString,
+        'subtitle': "Sarcastic Case",
+        'valid': True,
+        'uid': 'sarcasticcase',
         "icon": {
             "path": 'icon.png'
         },
